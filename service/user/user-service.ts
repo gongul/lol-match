@@ -1,8 +1,13 @@
 import fakeDatabase from '../../database/fakedatabase';
+import Container from '../../Container';
+import { Service } from '../../decorator/service';
 
+@Service()
 export default class UserSerivce implements UserService{
-    constructor(){
+    private container!:Container;
 
+    constructor(){
+        this.container = Container.getInstance();
     }
 
     findById(id:number):object | undefined{

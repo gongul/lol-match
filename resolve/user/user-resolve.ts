@@ -1,7 +1,6 @@
 import { Resolver,Query,Arg } from "type-graphql";
 import * as User from "../../entity/user/user";
-// import UserServiceImpl from '../../service/user/user-service';
-// import UserService from '../../interface/user-service';
+import UserServiceImpl from '../../service/user/user-service';
 import { Injection } from '../../decorator/injection';
 @Resolver(User.User)
 export class RecipeResolver {
@@ -18,3 +17,6 @@ export class RecipeResolver {
     }
 
 }
+
+
+AnimalType = new Dog();
