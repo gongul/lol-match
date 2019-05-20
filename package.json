@@ -14,6 +14,6 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node -r esm app.js"
+    "start": "tsc && node -r esm app.js"
   }
 }

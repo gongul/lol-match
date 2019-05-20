@@ -24,21 +24,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
 const User = __importStar(require("../../entity/user/user"));
-const fakedatabase_1 = __importDefault(require("../../database/fakedatabase"));
+const user_service_1 = __importDefault(require("../../service/user/user-service"));
+const injection_1 = require("../../decorator/injection");
 let RecipeResolver = class RecipeResolver {
     constructor() { }
     user(id) {
-        // const recipe =  this.recipeService.findById(id);
-        // if (recipe === undefined) {
-        //     throw new RecipeNotFoundError(id);
-        // }
-        // return recipe;
-        const data = fakedatabase_1.default.find((elem) => {
-            return elem.id == id;
-        });
+        const data = this.userService.findById(id);
         return data;
     }
 };
+__decorate([
+    injection_1.Injection(user_service_1.default),
+    __metadata("design:type", user_service_1.default)
+], RecipeResolver.prototype, "userService", void 0);
 __decorate([
     type_graphql_1.Query(returns => User.User),
     __param(0, type_graphql_1.Arg("id")),
@@ -51,18 +49,3 @@ RecipeResolver = __decorate([
     __metadata("design:paramtypes", [])
 ], RecipeResolver);
 exports.RecipeResolver = RecipeResolver;
-// const resolvers = {
-//   Query: {
-//       user(_, { id }) {
-//           const data: string = Object.keys(fakeDatabase).find((value) => {
-//               if (fakeDatabase[value].id == id) {
-//                   return true;
-//               }
-//           });
-//           return fakeDatabase[data];
-//       },
-//       allUser() {
-//           return fakeDatabase;
-//       }
-//   }
-// };

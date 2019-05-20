@@ -11,20 +11,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const user_1 = __importDefault(require("./user"));
+const user_router_1 = __importDefault(require("./user/user-router"));
 const user_resolve_1 = require("../resolve/user/user-resolve");
 function index(app) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield user_1.default(app);
-        // const schema = await buildSchema({
-        //     resolvers: [RecipeResolver],
-        // });
-        // app.use("/graphql",
-        //     graphqlHTTP({
-        //         schema: schema,
-        //         graphiql: false
-        //     })
-        // );
+        user_router_1.default(app);
         app.graph("/graphql", user_resolve_1.RecipeResolver, {
             graphiql: false
         });

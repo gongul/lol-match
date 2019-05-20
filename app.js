@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
 const express_graphql_1 = __importDefault(require("express-graphql"));
-const index_1 = __importDefault(require("./router/index"));
+const index_router_1 = __importDefault(require("./router/index-router"));
 const type_graphql_1 = require("type-graphql");
 const app = express_1.default();
 app.listen(4000);
@@ -27,5 +27,5 @@ app.graph = function (url, schemaClass, option) {
         this.use(url, express_graphql_1.default(option));
     });
 };
-index_1.default(app);
+index_router_1.default(app);
 console.log("Running a GraphQL server");
