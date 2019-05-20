@@ -1,6 +1,6 @@
 import fakeDatabase from '../../database/fakedatabase';
 
-export default class UserSerivce{
+export default class UserSerivce implements UserService{
     constructor(){
 
     }

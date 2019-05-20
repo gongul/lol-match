@@ -18,13 +18,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
 const User = __importStar(require("../../entity/user/user"));
-const user_service_1 = __importDefault(require("../../service/user/user-service"));
+// import UserServiceImpl from '../../service/user/user-service';
+// import UserService from '../../interface/user-service';
 const injection_1 = require("../../decorator/injection");
 let RecipeResolver = class RecipeResolver {
     constructor() { }
@@ -34,8 +32,8 @@ let RecipeResolver = class RecipeResolver {
     }
 };
 __decorate([
-    injection_1.Injection(user_service_1.default),
-    __metadata("design:type", user_service_1.default)
+    injection_1.Injection(),
+    __metadata("design:type", Object)
 ], RecipeResolver.prototype, "userService", void 0);
 __decorate([
     type_graphql_1.Query(returns => User.User),

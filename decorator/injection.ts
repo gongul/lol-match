@@ -1,10 +1,16 @@
 import { ClassType } from "type-graphql";
 import { DescriptionOptions } from "type-graphql/dist/decorators/types";
+import { Interface } from "readline";
 
 
-const Injection = (injectionClass:ClassType):Function => {  
+const Injection = ():Function => {  
     return (target:any, propertyKey: string, descriptor: DescriptionOptions) => {
-        target[propertyKey] = new injectionClass();
+        console.log(target);
+        console.log(propertyKey);
+        console.log(descriptor);
+        // target[propertyKey] = new injectionClass();
+
+        // descriptor.ㄷ
     }
 }
 

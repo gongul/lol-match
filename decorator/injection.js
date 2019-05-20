@@ -1,8 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Injection = (injectionClass) => {
+const Injection = () => {
     return (target, propertyKey, descriptor) => {
-        target[propertyKey] = new injectionClass();
+        console.log(target);
+        console.log(propertyKey);
+        console.log(descriptor);
+        // target[propertyKey] = new injectionClass();
+        // descriptor.ㄷ
     };
 };
 exports.Injection = Injection;
