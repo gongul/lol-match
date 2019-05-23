@@ -8,6 +8,8 @@ const Injection = ():Function => {
         console.log(target);
         console.log(propertyKey);
         console.log(descriptor);
+
+        console.log(target[propertyKey]);
         // target[propertyKey] = new injectionClass();
 
         // descriptor.ㄷ

@@ -21,8 +21,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const type_graphql_1 = require("type-graphql");
 const User = __importStar(require("../../entity/user/user"));
-// import UserServiceImpl from '../../service/user/user-service';
-// import UserService from '../../interface/user-service';
 const injection_1 = require("../../decorator/injection");
 let RecipeResolver = class RecipeResolver {
     constructor() { }

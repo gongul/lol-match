@@ -1,3 +1,3 @@
 interface UserService{
-    findById(id:number):object | undefined
+    findById(id:number):object | undefined;
 }
