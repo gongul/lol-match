@@ -9,11 +9,12 @@
     "graphql": "^14.3.0",
     "mysql": "^2.17.1",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^0.17.4"
+    "type-graphql": "^0.17.4",
+    "typedi": "^0.8.0"
   },
-  "main": "app.js",
+  "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node -r esm app.js"
+    "start": "tsc && node -r esm build/app.js"
   }
 }
