@@ -1,0 +1,5 @@
+const keys: any = {
+    "kakao" : {"clientID":"","clientSecret":""}
+}
+
+export default keys;
