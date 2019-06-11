@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-import Route from 'router/index-router';
+import Route from './router/index-router';
 import {buildSchema, ClassType} from "type-graphql";
 import { Container } from "typedi";
 import {createConnection,ConnectionOptions} from "typeorm";
