@@ -1,6 +1,6 @@
 import { Resolver,Query,Arg } from "type-graphql";
 import * as User from "../../entity/user/user";
-import Test from "../../entity/user/test";
+import Test from "../../entity/user/user";
 import { Inject } from "typedi";
 import "../../service/user/user-service";
 

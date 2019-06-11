@@ -1,7 +1,7 @@
 import fakeDatabase from '../../database/fakedatabase';
 import { Service } from "typedi";
 import { getManager, Repository } from "typeorm";
-import Test from "../../entity/user/test";
+import Test from "../../entity/user/user";
 
 @Service("userService")
 export class UserServiceImpl implements UserService{
