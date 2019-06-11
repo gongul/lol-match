@@ -1,13 +1,14 @@
 import { Resolver,Query,Arg } from "type-graphql";
 import * as User from "../../entity/user/user";
+import Test from "../../entity/user/test";
 import { Inject } from "typedi";
 import "../../service/user/user-service";
 
-@Resolver(User.User)
+@Resolver(Test)
 export class UserResolve {
     constructor(@Inject("userService") private userService:UserService) {}
 
-    @Query(returns => User.User)
+    @Query(returns => Test)
     user(@Arg("id") id: number) {
         const data: object|undefined = this.userService.findById(id);
         

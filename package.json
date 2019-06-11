@@ -3,18 +3,24 @@
   "dependencies": {
     "@types/express-graphql": "^0.8.0",
     "@types/graphql": "^14.2.0",
+    "@types/passport": "^1.0.0",
+    "@types/passport-kakao": "^0.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.0",
     "express-graphql": "^0.8.0",
     "graphql": "^14.3.0",
     "mysql": "^2.17.1",
+    "passport": "^0.4.0",
+    "passport-kakao": "^0.0.5",
     "reflect-metadata": "^0.1.13",
+    "sqlite3": "^4.0.8",
     "type-graphql": "^0.17.4",
-    "typedi": "^0.8.0"
+    "typedi": "^0.8.0",
+    "typeorm": "^0.2.17"
   },
-  "main": "app.ts",
+  "main": "web.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node -r esm build/app.js"
+    "start": "tsc && node -r esm build/web.js"
   }
 }

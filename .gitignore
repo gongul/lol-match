@@ -6,4 +6,9 @@ node_modules
 
 # build file 
 
-build
+build/
+
+# test file
+
+#sqllite
+*.sqlite
