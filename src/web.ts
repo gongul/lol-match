@@ -1,13 +1,13 @@
 import "reflect-metadata";
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-import router from './router';
+import router from './lol-match/router';
 import {buildSchema, ClassType} from "type-graphql";
 import { Container } from "typedi";
 import {createConnection,ConnectionOptions} from "typeorm";
 import passport from "passport";
 import session from "express-session";
-import interceptor from "./interceptor";
+import interceptor from "./lol-match/interceptor";
 import {renderFile} from "ejs";
 
 async function run(){

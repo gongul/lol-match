@@ -8,10 +8,16 @@ export class UserServiceImpl<T extends User> implements UserService<T>{
 
     constructor(){this.repo = getManager().getRepository(User);}
 
-    async findById(id:number):Promise<User|undefined|Error>{
+    /**
+    * 이메일 기준으로 유저를 찾는다.
+    * 
+    * @param email  user email
+    */
+
+    async findByEmail(email:string):Promise<User|undefined|Error>{
         const user:User = new User();
         
-        user.id = id;
+        user.email = email;
 
         try{
             const data = await this.repo.findOne(user);
@@ -23,6 +29,13 @@ export class UserServiceImpl<T extends User> implements UserService<T>{
        
     }
 
+     /**
+    * 유저 디비 저장
+    * 중복은 
+    * 
+    * @param entity  User를 상속한 모든 객체
+    * 
+    */
     save(entity:T):Promise<T|Error>{
         try{
             const obj = this.repo.save(entity);

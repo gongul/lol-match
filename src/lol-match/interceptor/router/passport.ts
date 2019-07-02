@@ -33,7 +33,7 @@ class Passport {
 			
 
 			try{
-				const hasUser = await _userService.findById(_profile.id);
+				const hasUser = await _userService.findByEmail(_profile.kaccount_email);
 
 
 				const user = new User();

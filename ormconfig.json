@@ -4,6 +4,6 @@
    "synchronize": true,
    "logging": false,
    "entities": [
-      "build/entity/**/*.js"
+      "build/lol-match/entity/**/*.js"
    ]
 }

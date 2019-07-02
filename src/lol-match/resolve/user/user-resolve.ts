@@ -10,8 +10,8 @@ export class UserResolve {
     constructor() {}
 
     @Query(returns => User)
-    user(@Arg("id") id: number) {
-        const data: object|undefined = this.userService.findById(id);
+    user(@Arg("email") email: string) {
+        const data: object|undefined = this.userService.findByEmail(email);
         
         return data;
     }
