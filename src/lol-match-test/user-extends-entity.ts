@@ -5,7 +5,7 @@ import { IsEmail } from "class-validator";
 
 @Entity()
 @ObjectType()
-export default class User implements User{
+export default class UserExtends implements User{
     @Column()
     @Field(type => Int)
     id!:number
@@ -23,4 +23,7 @@ export default class User implements User{
     @Column("varchar", { length: 5 })
     @Field()
     sex!:String
+
+    @Field()
+    field!:String
 }

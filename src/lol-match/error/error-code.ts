@@ -11,13 +11,17 @@ const ErrorCode = {
         MESSAGE: "Not Found Error",
         CODE: 404
     },
-    SEVER_ERROR: {
+    SERVER_ERROR: {
         MESSAGE: "Internal Server Error",
         CODE: 500
     },
     VALIDATION: {
         MESSAGE: "Validation Error",
         CODE: 422
+    },
+    QUERY_ERROR: {
+        MESSAGE: "Query Error",
+        CODE: 500
     }
  };
  
