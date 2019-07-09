@@ -16,6 +16,13 @@ interface UserService<T extends User>{
     */
     save(entity:T):Promise<T>;
 
+    /**
+    * 이메일 기준으로 유저를 찾고 인자 값을 추가하여 저장한다
+    * 
+    * @param email  user email
+    * 
+    */
+    findByEmailEndSave(email:string,args:object):Promise<User>;
 
     /**
     * 유저를 데이터베이스에 삽입 한다.

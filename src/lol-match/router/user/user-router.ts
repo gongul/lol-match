@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import Container from 'typedi';
+import User from '../../entity/user/user';
 
 const router = Router();
 

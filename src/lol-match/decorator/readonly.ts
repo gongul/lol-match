@@ -1,7 +1,8 @@
 const ReadOnly = ():Function => {  
-    return (target:any, propertyKey: string, descriptor: PropertyDescriptor) => {
-        descriptor.writable = false;
-        return descriptor
+    return (target:any, propertyKey: any, descriptor: any) => {
+       console.log(target);
+       console.log(propertyKey);
+       console.log(descriptor)
     }   
 }
 
