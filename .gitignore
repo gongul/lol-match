@@ -14,7 +14,7 @@ build/
 *.sqlite
 
 # secret file
-resources/config/api-key.ts
+src/lol-match/config/api-key.ts
 match_jwt_token
 match_jwt_token.pub
 match_jwt_token.pem
