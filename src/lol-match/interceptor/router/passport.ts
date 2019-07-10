@@ -15,8 +15,6 @@ class Passport {
 		const _userService:UserService<User> = this.userService;
 
 		passport.serializeUser((user:any, done) => { // Strategy 성공 시 호출됨
-			delete user.accessToken;
-
 			done(null, user); // 여기의 user가 deserializeUser의 첫 번째 매개변수로 이동
 		});
 		
@@ -41,7 +39,7 @@ class Passport {
 				user.name = _profile.properties.nickname;
 				user.email = _profile.kaccount_email;
 
-				if(hasUser === undefined) await _userService.insert(user)
+				if(hasUser === undefined) console.log(await _userService.insert(user));
 
 			}catch(e){
 				const err = new InternalServerError("회원가입 중에 에러가 발생하였습니다.");
