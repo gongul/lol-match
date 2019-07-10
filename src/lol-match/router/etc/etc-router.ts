@@ -48,11 +48,16 @@ class EtcController{
                 return next(e);
             }
 
+
             // 세션 정보 수정
             session.passport.name = user.name;
             session.passport.sex = user.sex;
             session.passport.lolName = user.lolName;
             session.isAddInfo = user.isAddInfo;
+
+
+            // 소셜 로그인 유지를 위한 쿠키 발급
+            res.cookie('uToken', jwtToken, {path: '/'});
 
             return res.send("success");
         });
