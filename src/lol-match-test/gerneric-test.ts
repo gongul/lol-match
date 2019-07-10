@@ -9,13 +9,6 @@ import throwTest from "./error-test";
 export default async function testRun(){
     const user = new UserEntity();
 
-    try{
-        await throwTest();
-       
-    }catch(e){
-        console.log("test main");
-        throw e;
-    }
 }
     
 

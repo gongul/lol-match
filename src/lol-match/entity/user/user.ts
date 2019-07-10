@@ -14,7 +14,7 @@ export default class User implements User{
     @Field()
     name!:String
 
-    @Column()
+    @Column({nullable:true})
     @Field({ nullable: true })
     lolName?:String
 
@@ -23,7 +23,7 @@ export default class User implements User{
     @IsEmail()
     email!:String
   
-    @Column("varchar", { length: 5 })
+    @Column("varchar", { length: 5,nullable:true })
     @Field({ nullable: true })
     sex?:String
 

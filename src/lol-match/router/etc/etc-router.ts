@@ -66,6 +66,7 @@ class EtcController{
             passport.authenticate('kakao')
         );
 
+        /* 바로 접근하는것도 막아야함 referer 체크하기 */
         router.get('/auth/kakao/callback',(req,res,next) => {
             passport.authenticate('kakao',(err,user,info) => {
                 if(err) return next(err);
