@@ -15,8 +15,8 @@ export default class User implements User{
     name!:String
 
     @Column()
-    @Field()
-    lolName!:String
+    @Field({ nullable: true })
+    lolName?:String
 
     @PrimaryColumn("varchar", { length: 50 })
     @Field()
@@ -24,8 +24,8 @@ export default class User implements User{
     email!:String
   
     @Column("varchar", { length: 5 })
-    @Field()
-    sex!:String
+    @Field({ nullable: true })
+    sex?:String
 
     @Column({ default: false })
     @Field()
