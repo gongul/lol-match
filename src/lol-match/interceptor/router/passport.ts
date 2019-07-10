@@ -41,7 +41,7 @@ class Passport {
 				user.name = _profile.properties.nickname;
 				user.email = _profile.kaccount_email;
 
-				if(hasUser === undefined) _userService.save(user)
+				if(hasUser === undefined) await _userService.insert(user)
 
 			}catch(e){
 				const err = new InternalServerError("회원가입 중에 에러가 발생하였습니다.");

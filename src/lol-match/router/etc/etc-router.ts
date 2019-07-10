@@ -43,7 +43,7 @@ class EtcController{
             try{ 
                 const userToken = new UserToken();
                 userToken.setData({token:jwtToken,accessToken:accessToken,email,expire:exp,Identifier:userAgent});
-                userTokenService.insert(userToken);
+                await userTokenService.insert(userToken);
             }catch(e){
                 return next(e);
             }
