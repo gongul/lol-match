@@ -26,7 +26,7 @@ class EtcController{
 
             const userAgent = req.headers['user-agent'];
             const {name,lolName,sex} = req.body;
-            const {email,accessToken} = session.passport;
+            const {email,accessToken} = session.passport.user;
             
              // 유저 추가 정보 입력
             try{   
