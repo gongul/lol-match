@@ -6,6 +6,7 @@ import test from "./lol-match-test/gerneric-test";
 import App from "./lol-match/config/app";
 import {developmentOptions,productionOptions} from "./lol-match/config/ormconfig";
 import { WebConfig } from "interface/web-config";
+import { exception } from "./lol-match/interceptor/exception";
 
 
 function configFn():WebConfig{
@@ -30,12 +31,14 @@ async function run(){
     const app = App.bootstrap(config.serverPort);
     interceptor(app);
     router(app);
-
+    
     if(process.env.NODE_ENV == "development"){
         test();
     }
     
-    console.log("Running a GraphQL server");
+    app.use(exception);
+
+    console.log(`Running a GraphQL server port :${config.serverPort} NODE_ENV ${process.env.NODE_ENV}`);
 }
 
 

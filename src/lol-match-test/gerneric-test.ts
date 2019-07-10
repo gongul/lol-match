@@ -3,12 +3,19 @@ import Container from "typedi";
 import UserEntity from "../lol-match/entity/user/user";
 import { validate } from "class-validator";
 import UserExtends from "./user-extends-entity";
+import throwTest from "./error-test";
 
 
-export default async () =>{
+export default async function testRun(){
     const user = new UserEntity();
 
-
+    try{
+        await throwTest();
+       
+    }catch(e){
+        console.log("test main");
+        throw e;
+    }
 }
     
 

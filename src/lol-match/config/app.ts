@@ -2,11 +2,9 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import {buildSchema, ClassType} from "type-graphql";
 import { Container } from "typedi";
-import {createConnection,ConnectionOptions} from "typeorm";
 import passport from "passport";
 import session from "express-session";
 import {renderFile} from "ejs";
-import { exception } from '../interceptor/exception';
 import AppRootPath from "app-root-path";
 
 export default class App{
@@ -40,7 +38,6 @@ export default class App{
         }));
         _app.use(passport.initialize()); // passport 구동
         _app.use(passport.session());
-        _app.use(exception);
     }
 
     public static bootstrap(serverPort:number){
