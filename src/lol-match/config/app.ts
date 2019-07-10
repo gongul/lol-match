@@ -10,7 +10,7 @@ import { exception } from '../interceptor/exception';
 import AppRootPath from "app-root-path";
 
 export default class App{
-    private app:any = express();
+    private app = express();
 
     private constructor(){
         const _app = this.app;
@@ -29,9 +29,6 @@ export default class App{
         _app.set('views', AppRootPath.path + '/resources/views');
         _app.set('view engine', 'ejs');
         _app.engine('html', renderFile);
-        
-
-        _app.listen(4000);
 
         _app.use(express.urlencoded({extended: false}));
         _app.use('/static',express.static(AppRootPath.path+'/resources/static'));
@@ -46,9 +43,11 @@ export default class App{
         _app.use(exception);
     }
 
-    public static bootstrap(){
-        const app = new App();
-        return app.app;
+    public static bootstrap(serverPort:number){
+        const express = new App();
+        express.app.listen(serverPort);
+
+        return express.app;
     }
 
 }
