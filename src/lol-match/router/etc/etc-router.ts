@@ -21,7 +21,7 @@ class EtcController{
         });
         
         router.post('/success-addinfo',async (req,res,next) => {
-            let session!:Express.Session;
+            let session:any = req.session;
             let user:User;
 
             const userAgent = req.headers['user-agent'];
