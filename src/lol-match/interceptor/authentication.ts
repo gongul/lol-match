@@ -12,25 +12,27 @@ export default class Authentication{
     async socialLogin(req:Request, res:Response, next:NextFunction){
         const userAgent = req.headers['user-agent'];
         const {cookies} = req;
-        if(req.session == undefined && cookies.uToken != undefined){
-            const info:any = new RsaToken().jwtDecoding(cookies);
 
-            if(info.email == undefined) return next();
+        if(req.session != undefined && req.session.passport != undefined) return next();
+        if(cookies == undefined || cookies.uToken == undefined) return next();
 
-            const userToken = new UserToken();
-            userToken.setData({Identifier:userAgent,email:info.email,token:cookies.uToken,expire:info.exp});
+        const info:any = new RsaToken().jwtDecoding(cookies);
 
-            const hasToken = await this.userTokenService.findOne(userToken);
+        if(info.email == undefined) return next();
 
-            if(hasToken == undefined){
-                res.clearCookie("uToken");
+        const userToken = new UserToken();
+        userToken.setData({Identifier:userAgent,email:info.email,token:cookies.uToken,expire:info.exp});
 
-                return next();
-            }
+        const hasToken = await this.userTokenService.findOne(userToken);
 
-            console.log(hasToken);
+        if(hasToken == undefined){
+            res.clearCookie("uToken");
 
+            return next();
         }
+
+        console.log(hasToken);
+
 
         return next();
     }

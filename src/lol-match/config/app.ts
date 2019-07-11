@@ -34,7 +34,8 @@ export default class App{
             secret: '@#@2$lol-match#@1$#$',
             resave: false,
             saveUninitialized: true,
-            cookie:{maxAge: (60 * 1000 * 30)}
+            cookie:{maxAge:1000*60}
+            // cookie:{maxAge: (60 * 1000 * 30)}
         }));
         _app.use(passport.initialize()); // passport 구동
         _app.use(passport.session());
