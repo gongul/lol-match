@@ -46,7 +46,7 @@ class Passport {
 				return done(err,null);
 			}
 			
-			done(null,{"id":_profile.id,"email":_profile.kaccount_email,"name":_profile.nickname,"accessToken":accessToken,"isAddInfo":false});
+			done(null,{"id":_profile.id,"email":_profile.kaccount_email,"name":_profile.properties.nickname,"accessToken":accessToken,"isAddInfo":false});
 		}));
 	}
 
