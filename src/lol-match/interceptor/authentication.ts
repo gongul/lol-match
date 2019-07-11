@@ -10,6 +10,7 @@ export default class Authentication{
     private userTokenService!:UserTokenService<UserToken>;
     
     async socialLogin(req:Request, res:Response, next:NextFunction){
+        console.log("auth")
         const userAgent = req.headers['user-agent'];
         const {cookies} = req;
 

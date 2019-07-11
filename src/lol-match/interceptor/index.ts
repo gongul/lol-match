@@ -6,6 +6,8 @@ import Authentication from "./authentication";
 
 export default function index(app:any){
     const auth = Container.get(Authentication);
+    console.log(auth);
+    console.log("in auth");
     Container.get(Passport);
 
     app.use(auth.socialLogin);
