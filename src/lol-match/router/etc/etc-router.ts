@@ -26,24 +26,26 @@ class EtcController{
             });
         });
         
+
+        // 추가 정보 입력하는 로직 
         _router.post('/success-addinfo',async (req,res,next) => {
             let session:any = req.session;
             let sessionInfo:any = session.passport.user;
-            let user:User;
 
             const userAgent = req.headers['user-agent'];
             const {name,lolName,sex} = req.body;
             const {email,accessToken} = sessionInfo;
-            
+
+            let user:User = new User({name:name,lolName:lolName,sex:sex,isAddInfo:true});
+
              // 유저 추가 정보 입력
             try{   
-                user = await this.userService.findByEmailEndSave(email,
-                        {name:name,lolName:lolName,sex:sex,isAddInfo:true});
+                user = await this.userService.findByEmailEndSave(email,user);
             }catch(e){
                 return next(e);
             }
             
-            const exp = Math.floor(Date.now() / 1000) + 21600;  // 현재시간 + 6시간 후에 만료됨. 
+            const exp = Math.floor(Date.now() / 1000) + 14400;  // 현재시간 + 6시간 후에 만료됨. 
             const jwtToken = new RsaToken().jwtEncoding({email:email,exp:exp});
             
             // 소셜 로그인 6시간 자동 소셜 유저 확인을 위한 토큰 저장 
@@ -54,7 +56,6 @@ class EtcController{
             }catch(e){
                 return next(e);
             }
-
 
             // 세션 정보 수정
             sessionInfo.name = user.name;

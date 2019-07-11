@@ -6,6 +6,7 @@ import passport from "passport";
 import session from "express-session";
 import {renderFile} from "ejs";
 import AppRootPath from "app-root-path";
+import cookieParser from "cookie-parser";
 
 export default class App{
     private app = express();
@@ -30,12 +31,12 @@ export default class App{
 
         _app.use(express.urlencoded({extended: false}));
         _app.use('/static',express.static(AppRootPath.path+'/resources/static'));
+        _app.use(cookieParser())
         _app.use(session({
             secret: '@#@2$lol-match#@1$#$',
             resave: false,
             saveUninitialized: true,
-            cookie:{maxAge:1000*60}
-            // cookie:{maxAge: (60 * 1000 * 30)}
+            cookie:{maxAge: (60 * 1000 * 30)}
         }));
         _app.use(passport.initialize()); // passport 구동
         _app.use(passport.session());

@@ -33,14 +33,10 @@ class Passport {
 			try{
 				const hasUser = await _userService.findByEmail(_profile.kaccount_email);
 
+				const user = new User({id:_profile.id,name:_profile.properties.nickname,email:_profile.kaccount_email});
 
-				const user = new User();
-				user.id = _profile.id;
-				user.name = _profile.properties.nickname;
-				user.email = _profile.kaccount_email;
-
-				if(hasUser === undefined) console.log(await _userService.insert(user));
-
+				if(hasUser === undefined) await _userService.insert(user);	
+				
 			}catch(e){
 				const err = new InternalServerError("회원가입 중에 에러가 발생하였습니다.");
 				return done(err,null);

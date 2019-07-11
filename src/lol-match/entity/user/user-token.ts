@@ -30,12 +30,18 @@ export default class UserToken{
     @Field()
     Identifier!:string
 
+    constructor(args: object|UserToken|void){
+        if(args != undefined) this.setData(args);
+    }
+
      /* 해당 함수를 사용 시 위에 없는 필드값으로 들어올 시 그 이름으로 들어간다. */
-     setData(data: object|UserToken): void {
+     setData(data: object|UserToken): this {
         const _self = this;
 
         for (let [key,value] of Object.entries(data)) {
             (<any>_self)[key] = value;
         }
+
+        return this;
     }
 }
