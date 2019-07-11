@@ -12,6 +12,7 @@ export default class Authentication{
     constructor() {}
 
     async socialLogin(req:Request, res:Response, next:NextFunction){
+        console.log(this);
         console.log("auth");
         console.log("auth");
         console.log(this.userTokenService);

@@ -4,11 +4,11 @@ import {Passport} from "./router/passport";
 import {Container} from "typedi";
 import Authentication from "./authentication";
 
-export default function index(app:any){
-    const auth = Container.get(Authentication);
+export default async function index(app:any){
+    const auth = await Container.get(Authentication);
     console.log(auth);
     console.log("in auth");
-    Container.get(Passport);
+    await Container.get(Passport);
 
     app.use(auth.socialLogin);
     app.use('/',etc);
