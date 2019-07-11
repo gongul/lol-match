@@ -2,7 +2,7 @@ import { Service } from "typedi";
 import { getManager, Repository, ObjectLiteral, InsertResult, QueryFailedError } from "typeorm";
 import User from "../../entity/user/user";
 import { QueryError } from "../../error/error";
-import UserToken from "src/lol-match/entity/user/user-token";
+import UserToken from "../../entity/user/user-token";
 
 @Service("userTokenService")
 export default class UserTokenServiceImpl<T extends UserToken>{

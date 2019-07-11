@@ -1,18 +1,23 @@
 import {Router} from 'express';
-import Container from 'typedi';
+import { Inject } from 'typedi';
 import User from '../../entity/user/user';
 
-const router = Router();
-
 class UserController{
-    static router(){
-        const userService:UserService<User> = Container.get("userService");
-        
-        router.get('/',(req,res)=>{
-            res.json({"a":"b"});
-        })
+    public router:Router = Router();
+    @Inject("userService")
+    private userService!:UserService<User>;
 
-        return router
+    constructor(){
+        this.controller();
+    }
+
+    private controller():void{
+        const _router = this.router;
+        
+        _router.get('/',(req,res,next) => {
+            return res.json({message:"user root"})
+        });
+        
     }
 }
 

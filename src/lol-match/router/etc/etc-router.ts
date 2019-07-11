@@ -1,26 +1,32 @@
 import {Router} from 'express';
 import passport from "passport";
-import { Container } from 'typedi';
+import { Container, Inject } from 'typedi';
 import { InternalServerError, NoDataError } from '../../error/error';
 import RsaToken from "../../util/rsa-token";
 import UserToken from '../../entity/user/user-token';
 import UserTokenService from "../../service/user/user-token-service";
 import User from "../../entity/user/user";
 
-const router = Router();
-
 class EtcController{
-    static router(){
-        const userService:UserService<User> = Container.get("userService");
-        const userTokenService:UserTokenService<UserToken> = Container.get("userTokenService");
+    public router:Router = Router();
+    @Inject("userService")
+    private userService!:UserService<User>;
+    @Inject("userTokenService")
+    private userTokenService!:UserTokenService<UserToken>;
 
-        router.get('/login',(req,res,next) => {
+    constructor(){
+        this.controller();
+    }
+
+    private controller():void{
+        const _router = this.router;
+        _router.get('/login',(req,res,next) => {
             return res.render("begin-login",{
                 name: "테스트"
             });
         });
         
-        router.post('/success-addinfo',async (req,res,next) => {
+        _router.post('/success-addinfo',async (req,res,next) => {
             let session:any = req.session;
             let user:User;
 
@@ -30,7 +36,7 @@ class EtcController{
             
              // 유저 추가 정보 입력
             try{   
-                user = await userService.findByEmailEndSave(email,
+                user = await this.userService.findByEmailEndSave(email,
                         {name:name,lolName:lolName,sex:sex,isAddInfo:true});
             }catch(e){
                 return next(e);
@@ -43,7 +49,7 @@ class EtcController{
             try{ 
                 const userToken = new UserToken();
                 userToken.setData({token:jwtToken,accessToken:accessToken,email,expire:exp,Identifier:userAgent});
-                await userTokenService.insert(userToken);
+                await this.userTokenService.insert(userToken);
             }catch(e){
                 return next(e);
             }
@@ -62,12 +68,12 @@ class EtcController{
             return res.send("success");
         });
         
-        router.get('/auth/kakao',
+        _router.get('/auth/kakao',
             passport.authenticate('kakao')
         );
 
         /* 바로 접근하는것도 막아야함 referer 체크하기 */
-        router.get('/auth/kakao/callback',(req,res,next) => {
+        _router.get('/auth/kakao/callback',(req,res,next) => {
             passport.authenticate('kakao',(err,user,info) => {
                 if(err) return next(err);
                 if (!user) { return res.redirect('/login'); }
@@ -88,7 +94,6 @@ class EtcController{
             })(req,res,next);
         });
 
-        return router;
     }
 }
 
