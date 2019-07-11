@@ -9,8 +9,11 @@ export default class Authentication{
     @Inject("userTokenService")
     private userTokenService!:UserTokenService<UserToken>;
     
+    constructor() {}
+    
     async socialLogin(req:Request, res:Response, next:NextFunction){
-        console.log("auth")
+        console.log("auth");
+        console.log(this.userTokenService);
         const userAgent = req.headers['user-agent'];
         const {cookies} = req;
 
