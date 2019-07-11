@@ -2,7 +2,7 @@ import user from "./router/user";
 import etc from "./router/etc";
 import {Passport} from "./router/passport";
 import {Container} from "typedi";
-import Authentication from "./authentication";
+import {Authentication} from "./authentication";
 
 export default async function index(app:any){
     const auth = await Container.get(Authentication);

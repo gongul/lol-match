@@ -5,7 +5,7 @@ import RsaToken from "../util/rsa-token";
 import UserTokenService from "../service/user/user-token-service";
 import UserToken from "../entity/user/user-token";
 
-export default class Authentication{
+export class Authentication{
     @Inject("userTokenService")
     private userTokenService!:UserTokenService<UserToken>;
     
