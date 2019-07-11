@@ -11,15 +11,21 @@ export default class RsaToken{
         this.pcert = fs.readFileSync(AppRootPath.path+"/resources/ssl/match_jwt_token.pem");
     }
 
-    jwtEncoding(body:object){
+    jwtEncoding(body:object):string{
         const token = jwt.sign(body,this.cert,{algorithm:'RS256'})
         
         return token;
     }
 
-    jwtDecoding(token:string){
-        const info:object|string = jwt.verify(token,this.pcert);
+    jwtDecoding(token:string):object{
+        let info:object|string = jwt.verify(token,this.pcert);
         
-        return info;
+        if(info instanceof Object){
+           return info;
+        }
+
+        const objInfo = {'payload':info};
+
+        return objInfo;   
     }
 }

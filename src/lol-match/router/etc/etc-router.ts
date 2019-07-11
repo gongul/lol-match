@@ -28,11 +28,12 @@ class EtcController{
         
         _router.post('/success-addinfo',async (req,res,next) => {
             let session:any = req.session;
+            let sessionInfo:any = session.passport.user;
             let user:User;
 
             const userAgent = req.headers['user-agent'];
             const {name,lolName,sex} = req.body;
-            const {email,accessToken} = session.passport.user;
+            const {email,accessToken} = sessionInfo;
             
              // 유저 추가 정보 입력
             try{   
@@ -56,14 +57,14 @@ class EtcController{
 
 
             // 세션 정보 수정
-            session.passport.name = user.name;
-            session.passport.sex = user.sex;
-            session.passport.lolName = user.lolName;
-            session.isAddInfo = user.isAddInfo;
+            sessionInfo.name = user.name;
+            sessionInfo.sex = user.sex;
+            sessionInfo.lolName = user.lolName;
+            sessionInfo.isAddInfo = user.isAddInfo;
 
 
             // 소셜 로그인 유지를 위한 쿠키 발급
-            res.cookie('uToken', jwtToken, {path: '/'});
+            res.cookie('uToken', jwtToken, {path: '/',expires:new Date(exp*1000)});
 
             return res.send("success");
         });
