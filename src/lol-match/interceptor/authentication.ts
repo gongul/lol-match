@@ -16,7 +16,7 @@ export default class Authentication{
         if(req.session != undefined && req.session.passport != undefined) return next();
         if(cookies == undefined || cookies.uToken == undefined) return next();
 
-        const info:any = new RsaToken().jwtDecoding(cookies);
+        const info:any = new RsaToken().jwtDecoding(cookies.uToken);
 
         if(info.email == undefined) return next();
 
