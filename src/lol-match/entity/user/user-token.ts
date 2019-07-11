@@ -14,9 +14,9 @@ export default class UserToken{
     token!:String
 
     @OneToMany(type => User, user => user.email)
-    @Field()
+    @Field(type => [User])
     @IsEmail()
-    email!:String
+    email!:User[]
 
     @Column("varchar", { length: 100 })
     @Field()
