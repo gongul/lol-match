@@ -12,7 +12,7 @@ const router = Router();
 class EtcController{
     static router(){
         const userService:UserService<User> = Container.get("userService");
-        const userTokenService:UserTokenService<UserToken> = Container.get("userService");
+        const userTokenService:UserTokenService<UserToken> = Container.get("userTokenService");
 
         router.get('/login',(req,res,next) => {
             return res.render("begin-login",{
