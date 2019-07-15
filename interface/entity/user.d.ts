@@ -6,5 +6,5 @@ interface User{
     sex?:String
     isAddInfo:boolean
 
-    setData(data: object): void;
+    setData(data: object): this;
 }

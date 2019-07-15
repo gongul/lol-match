@@ -35,6 +35,10 @@ class EtcController{
             const {name,lolName,sex} = req.body;
             const {email,accessToken} = sessionInfo;
             
+            console.log("-------etc rotuer");
+            console.log(session);
+            console.log(sessionInfo);
+
              // 유저 추가 정보 입력
             try{   
                 user = await this.userService.findByEmailEndSave(email,
