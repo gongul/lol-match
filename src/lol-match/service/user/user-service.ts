@@ -38,13 +38,13 @@ export class UserServiceImpl<T extends User> implements UserService<T>{
     * @param email  user email
     * 
     */
-    async findByEmailEndSave(email:string,args:object):Promise<User>{
+    async findByEmailEndSave<T extends User>(email:string,args:T):Promise<User>{
         try{
             const hasUser = await this.findByEmail(email);
 
             if(hasUser === undefined) throw new NoDataError("유저 데이터가 없습니다.");
 
-            const user = await this.save(hasUser);
+            const user = await this.save(args);
 
             return user;
 
