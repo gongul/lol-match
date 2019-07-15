@@ -43,7 +43,8 @@ export class UserServiceImpl<T extends User> implements UserService<T>{
             const hasUser = await this.findByEmail(email);
 
             if(hasUser === undefined) throw new NoDataError("유저 데이터가 없습니다.");
-
+            
+            args.email = hasUser.email;
             const user = await this.save(args);
 
             return user;
