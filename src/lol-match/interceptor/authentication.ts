@@ -4,6 +4,7 @@ import { NextFunction } from "connect";
 import RsaToken from "../util/rsa-token";
 import UserTokenService from "../service/user/user-token-service";
 import UserToken from "../entity/user/user-token";
+import User from "../entity/user/user";
 
 export class Authentication{
     @Inject("userTokenService")
@@ -28,8 +29,12 @@ export class Authentication{
 
         if(info.email == undefined) return next();
 
+        const u = new User();
+        u.email = info.email;
+
         const userToken = new UserToken();
-        userToken.setData({Identifier:userAgent,email:info.email,token:cookies.uToken,expire:info.exp});
+        userToken.setData({Identifier:userAgent,token:cookies.uToken,expire:info.exp});
+        userToken.email = [u];
 
         const hasToken = await this.userTokenService.findOne(userToken);
 

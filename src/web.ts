@@ -29,11 +29,12 @@ async function run(){
     
     await createConnection(config.ormConfig);
     const app = App.bootstrap(config.serverPort);
+
     interceptor(app);
     router(app);
     
     if(process.env.NODE_ENV == "development"){
-        test();
+        test(app);
     }
     
     app.use(exception);
