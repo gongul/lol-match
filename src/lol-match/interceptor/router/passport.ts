@@ -39,6 +39,7 @@ class Passport {
 				user.name = _profile.properties.nickname;
 				user.email = _profile.kaccount_email;
 
+				console.log("passport");
 				if(hasUser === undefined) console.log(await _userService.insert(user));
 
 			}catch(e){
