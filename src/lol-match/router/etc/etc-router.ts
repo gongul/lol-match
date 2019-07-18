@@ -26,6 +26,8 @@ class EtcController{
             });
         });
         
+
+        // 추가 정보 입력하는 로직 
         _router.post('/success-addinfo',async (req,res,next) => {
             let session:any = req.session;
             let sessionInfo:any = session.passport.user;
@@ -35,8 +37,6 @@ class EtcController{
             const {email,accessToken} = sessionInfo;
 
             let user:User = new User({name:name,lolName:lolName,sex:sex,isAddInfo:true});
-
-            console.log("-------etc rotuer");
 
              // 유저 추가 정보 입력
             try{   
@@ -56,8 +56,6 @@ class EtcController{
             }catch(e){
                 return next(e);
             }
-
-            console.log(user);
 
             // 세션 정보 수정
             sessionInfo.name = user.name;

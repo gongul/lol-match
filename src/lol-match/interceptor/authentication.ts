@@ -5,6 +5,7 @@ import RsaToken from "../util/rsa-token";
 import UserTokenService from "../service/user/user-token-service";
 import UserToken from "../entity/user/user-token";
 import User from "../entity/user/user";
+import Axios from "axios";
 
 export class Authentication{
     @Inject("userTokenService")
@@ -17,12 +18,12 @@ export class Authentication{
     *  쿠키는 발급 부터 6시간 작동한다
     */
     async socialLogin(req:Request, res:Response, next:NextFunction){
+        const url = "https://kapi.kakao.com/v1/user/access_token_info";
         const userAgent = req.headers['user-agent'];
         const {cookies} = req;
 
-        // 소셜 로그인 세션이 있으면 
+        // 소셜 로그인 세션이 있거나 소셜 로그인 자동 유지 쿠키가 없으면   
         if(req.session != undefined && req.session.passport != undefined) return next();
-        // 소셜 로그인 자동 유지 쿠키가 없을 때
         if(cookies == undefined || cookies.uToken == undefined) return next();
 
         const info:any = new RsaToken().jwtDecoding(cookies.uToken);
@@ -37,6 +38,9 @@ export class Authentication{
         // 클라이언트가 보낸 쿠키랑 각종 식별자들이 매치되지 않을 때
         if(hasToken == undefined) return endCookie(); 
 
+        const response = await Axios.get(url,{headers:{'Authorization': "bearer " + hasToken.accessToken}});
+        
+        console.log(response);
         console.log(hasToken);
 
         return next();
