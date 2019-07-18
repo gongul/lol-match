@@ -45,7 +45,7 @@ class EtcController{
                 return next(e);
             }
             
-            const exp = Math.floor(Date.now() / 1000) + 21600;  // 현재시간 + 6시간 후에 만료됨. 
+            const exp = Math.floor(Date.now() / 1000) + 14400;  // 현재시간 + 6시간 후에 만료됨. 
             const jwtToken = new RsaToken().jwtEncoding({email:email,exp:exp});
             
             // 소셜 로그인 6시간 자동 소셜 유저 확인을 위한 토큰 저장 

@@ -6,10 +6,14 @@ import UserTokenService from "../service/user/user-token-service";
 import UserToken from "../entity/user/user-token";
 import User from "../entity/user/user";
 import Axios from "axios";
+import { InternalServerError } from "../error/error";
 
 export class Authentication{
     @Inject("userTokenService")
     private userTokenService!:UserTokenService<UserToken>;
+
+    @Inject("userService")
+    private userService!:UserService<User>;
     
     constructor() {}
 
@@ -40,16 +44,35 @@ export class Authentication{
 
         const response = await Axios.get(url,{headers:{'Authorization': "bearer " + hasToken.accessToken}});
         
+        if(response.status !== 200) return next();
+
+        const user = await this.userService.findByEmail(info.email);
+
         console.log(response);
         console.log(hasToken);
 
-        return next();
 
-
+        return setSession();
+       
         function endCookie(){
             res.clearCookie("uToken");
     
             return next();
+        }
+
+        function setSession(){
+            if(req.session && user && hasToken){
+                const sessionInfo = {id:user.id,email:user.email,name:user.name,
+                    accessToken:hasToken.accessToken,isAddInfo:user.isAddInfo,
+                    sex:user.sex,lolName:user.lolName};
+
+                req.login(sessionInfo,(err) => {
+                    if(err){
+                        // const loginCustomError = new InternalServerError("세션 등록 중에 에러가 발생하였습니다.");
+                        return next();
+                    }
+                });
+            }
         }
     }
 
