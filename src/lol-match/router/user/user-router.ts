@@ -2,7 +2,7 @@ import { Inject } from 'typedi';
 import User from '../../entity/user/user';
 import Router from '../../config/express-router';
 import { Router as ExpressRouter} from 'express';
-import { UserResolve } from 'src/lol-match/resolve/user/user-resolve';
+import { UserResolve } from '../../resolve/user/user-resolve';
 
 class UserController{
     public router:ExpressRouter = Router();

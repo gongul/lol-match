@@ -1,7 +1,6 @@
 import {UserResolve} from "../resolve/user/user-resolve";
 import {buildSchema} from "type-graphql";
 import graphqlHTTP from 'express-graphql';
-
 import Container from "typedi";
 import EtcController from "./etc/etc-router";
 import UserController from "./user/user-router";
