@@ -22,6 +22,7 @@ class Passport {
 			done(null, user); // 여기의 user가 req.user가 됨
 		});
 
+		// 이메일 없을 때 예외처리 해야됨.
 		passport.use(new KaKaoStrategy({
 			clientID: keys.kakao.clientID,
 			clientSecret: keys.kakao.clientSecret,

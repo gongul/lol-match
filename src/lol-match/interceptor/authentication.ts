@@ -34,20 +34,27 @@ export class Authentication{
         // 쿠키 값이 정상이 아닐 때 
         if(info.email == undefined) return endCookie(); 
 
-        const u = new User({email:info.email});
-        const userToken = new UserToken({Identifier:userAgent,token:cookies.uToken,expire:info.exp,email:[u]});
+        let hasToken:UserToken|undefined;
+        let user:User|undefined;
 
-        const hasToken = await this.userTokenService.findOne(userToken);
+        try{    
+            const u = new User({email:info.email});
+            const userToken = new UserToken({Identifier:userAgent,token:cookies.uToken,expire:info.exp,email:[u]});
+    
+            hasToken = await this.userTokenService.findOne(userToken);
+    
+            // 클라이언트가 보낸 쿠키랑 각종 식별자들이 매치되지 않을 때
+            if(hasToken == undefined) return endCookie(); 
 
-        // 클라이언트가 보낸 쿠키랑 각종 식별자들이 매치되지 않을 때
-        if(hasToken == undefined) return endCookie(); 
+            const response = await Axios.get(url,{headers:{'Authorization': "bearer " + hasToken.accessToken}});
+            
+            if(response.status !== 200) return next();
 
-        const response = await Axios.get(url,{headers:{'Authorization': "bearer " + hasToken.accessToken}});
+            user = await this.userService.findByEmail(info.email);
+        }catch(e){
+            return next();
+        }  
         
-        if(response.status !== 200) return next();
-
-        const user = await this.userService.findByEmail(info.email);
-
         return setSession();
        
         function endCookie(){

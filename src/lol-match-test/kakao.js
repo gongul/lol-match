@@ -10,7 +10,7 @@ async function checkSocicalUserToken(url){
 
         console.log(response.data);
     }catch(e){
-        throw e;
+        console.log(e.response.status);
     }
 }
 
