@@ -10,7 +10,7 @@ export class UserResolve {
     constructor() {}
 
     @Query(returns => User)
-    async user(@Arg("email") email: string) {
+    async findByEmail(@Arg("email") email: string) {
         const data: object|undefined = await this.userService.findByEmail(email);
         
         return data;

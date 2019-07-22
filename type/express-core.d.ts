@@ -160,7 +160,9 @@ export interface IRoute {
     unsubscribe: IRouterHandler<this>;
 }
 
-export interface Router extends IRouter { }
+export interface Router extends IRouter {
+    graph(url : string,schemaClass : any,option: any ): void;
+ }
 
 export interface CookieOptions {
     maxAge?: number;

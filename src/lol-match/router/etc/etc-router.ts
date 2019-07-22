@@ -29,7 +29,7 @@ class EtcController{
             let name:string = "";
 
             if(req.session && req.session.passport){
-                name = req.session.passport.name;
+                name = req.session.passport.user.name;
             }
 
             return res.render("begin-login",{
