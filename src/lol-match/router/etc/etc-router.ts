@@ -21,11 +21,21 @@ class EtcController{
     private controller():void{
         const _router = this.router;
         _router.get('/login',(req,res,next) => {
-            return res.render("begin-login",{
-                name: "테스트"
-            });
+            return res.redirect(301,"/begin-addinfo");
         });
         
+
+        _router.get('/begin-addinfo',(req,res,next) => {
+            let name:string = "";
+
+            if(req.session && req.session.passport){
+                name = req.session.passport.name;
+            }
+
+            return res.render("begin-login",{
+                name: name
+            });
+        });
 
         // 추가 정보 입력하는 로직 
         _router.post('/success-addinfo',async (req,res,next) => {
@@ -45,10 +55,10 @@ class EtcController{
                 return next(e);
             }
             
-            const exp = Math.floor(Date.now() / 1000) + 14400;  // 현재시간 + 6시간 후에 만료됨. 
+            const exp = Math.floor(Date.now() / 1000) + 14400;  // 현재시간 + 4시간 후에 만료됨. 
             const jwtToken = new RsaToken().jwtEncoding({email:email,exp:exp});
             
-            // 소셜 로그인 6시간 자동 소셜 유저 확인을 위한 토큰 저장 
+            // 소셜 로그인 4시간 자동 소셜 유저 확인을 위한 토큰 저장 
             try{ 
                 const userToken = new UserToken();
                 userToken.setData({token:jwtToken,accessToken:accessToken,email,expire:exp,Identifier:userAgent});
@@ -74,7 +84,7 @@ class EtcController{
             passport.authenticate('kakao')
         );
 
-        /* 바로 접근하는것도 막아야함 referer 체크하기 */
+        /* url 직접 접근 방지 할 방법을 생각해야함. */
         _router.get('/auth/kakao/callback',(req,res,next) => {
             passport.authenticate('kakao',(err,user,info) => {
                 if(err) return next(err);
@@ -87,9 +97,7 @@ class EtcController{
                     }
 
                     
-                    return res.render("begin-login",{
-                        name: user.name
-                    });
+                    return res.redirect(301,"/begin-addinfo");
                 });
         
                 
