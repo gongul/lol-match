@@ -21,7 +21,7 @@ class EtcController{
     private controller():void{
         const _router = this.router;
         _router.get('/login',(req,res,next) => {
-            return res.redirect(301,"/begin-addinfo");
+            return res.redirect(302,"/begin-addinfo");
         });
         
 
@@ -97,7 +97,7 @@ class EtcController{
                     }
 
                     
-                    return res.redirect(301,"/begin-addinfo");
+                    return res.redirect(302,"/begin-addinfo");
                 });
         
                 
