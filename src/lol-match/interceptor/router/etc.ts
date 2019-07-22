@@ -3,7 +3,7 @@ import {Router} from 'express';
 const router = Router();
 
 router.use('/begin-addinfo',(req,res,next) => {
-    if(req.session == undefined || req.session.passport == undefined || req.session.passport.isAddInfo == true) return res.redirect(301,"/");
+    if(req.session == undefined || req.session.passport == undefined || req.session.passport.user.isAddInfo == true) return res.redirect(301,"/");
 
     return next();
 });
