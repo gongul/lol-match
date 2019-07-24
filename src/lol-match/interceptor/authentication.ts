@@ -26,6 +26,16 @@ export class Authentication{
         const userAgent = req.headers['user-agent'];
         const {cookies} = req;
 
+        //실행 무시 하는 path list 
+        const blackList = ['/auth/kakao','/auth/kakao/callback','/login'];
+        let path = req.originalUrl.replace(/\?.*$/, '');
+        
+        if(path.charAt(path.length-1) == "/"){
+            path = path.substring(0,path.length-1);
+        }
+        
+        if(blackList.indexOf(path) > -1) return next();
+
         // 소셜 로그인 세션이 있거나 소셜 로그인 자동 유지 쿠키가 없으면   
         if(req.session != undefined && req.session.passport != undefined) return next();
         if(cookies == undefined || cookies.uToken == undefined) return next();

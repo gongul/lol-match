@@ -4,11 +4,12 @@ import graphqlHTTP from 'express-graphql';
 import Container from "typedi";
 import EtcController from "./etc/etc-router";
 import UserController from "./user/user-router";
+import {Express} from "../../../type/express-core";
 
-export default async function index(app: any){
+export default async function index(app: Express){
     const etc = Container.get(EtcController);
     const user = Container.get(UserController);
-
+    
     app.use('/user',user.router);
     app.use('/',etc.router);
     

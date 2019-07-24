@@ -77,7 +77,7 @@ class EtcController{
             // 소셜 로그인 유지를 위한 쿠키 발급
             res.cookie('uToken', jwtToken, {path: '/',expires:new Date(exp*1000)});
 
-            return res.send("success");
+            return res.redirect("/");
         });
         
         _router.get('/auth/kakao',

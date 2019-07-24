@@ -2,6 +2,14 @@ import {Router} from 'express';
 
 const router = Router();
 
+// 추가 정보 입력이 안되어 있으면 추가 정보창으로 리다이렉트
+router.use((req,res,next) => {
+    if(req.session && req.session.passport && req.session.passport.user.isAddInfo == false){
+        return res.redirect(302,"/begin-addinfo");
+    }
+
+    return next();
+})
 router.use('/begin-addinfo',(req,res,next) => {
     if(req.session == undefined || req.session.passport == undefined || req.session.passport.user.isAddInfo == true) return res.redirect(302,"/");
 

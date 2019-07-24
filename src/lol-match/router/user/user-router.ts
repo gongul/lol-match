@@ -1,6 +1,6 @@
 import { Inject } from 'typedi';
 import User from '../../entity/user/user';
-import Router from '../../config/express-router';
+import Router from '../../config/override-express-router';
 import { Router as ExpressRouter} from 'express';
 import { UserResolve } from '../../resolve/user/user-resolve';
 
@@ -21,10 +21,10 @@ class UserController{
             return res.json({message:"user root"})
         });
 
-        _router.graph("/",UserResolve,
-                {
-                    graphiql: false,
-                });
+        // _router.graph("/",UserResolve,
+        //         {
+        //             graphiql: false,
+        //         });
     }
 }
 

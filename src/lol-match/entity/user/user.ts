@@ -12,20 +12,20 @@ export default class User implements User{
 
     @Column()
     @Field()
-    name!:String
+    name!:string
 
     @Column({nullable:true})
     @Field({ nullable: true })
-    lolName?:String
+    lolName?:string
 
     @PrimaryColumn("varchar", { length: 50 })
     @Field()
     @IsEmail()
-    email!:String
+    email!:string
   
     @Column("varchar", { length: 5,nullable:true })
     @Field({ nullable: true })
-    sex?:String
+    sex?:string
 
     @Column({ default: false })
     @Field()

@@ -29,21 +29,27 @@ class Passport {
 			callbackURL: "/auth/kakao/callback"
 		},async function (accessToken:string, refreshToken:string, profile:any, done:any) {
 			const _profile = profile._json;
-			
+			let sessionInfo:object;
 
 			try{
 				const hasUser = await _userService.findByEmail(_profile.kaccount_email);
 
 				const user = new User({id:_profile.id,name:_profile.properties.nickname,email:_profile.kaccount_email});
 
-				if(hasUser === undefined) await _userService.insert(user);	
+				if(hasUser === undefined) {
+					await _userService.insert(user);
+					sessionInfo = {"id":_profile.id,"email":_profile.kaccount_email,"name":_profile.properties.nickname,"accessToken":accessToken,"isAddInfo":false}
+				}else{
+					sessionInfo = {"id":hasUser.id,"email":hasUser.email,"name":hasUser.name,"accessToken":accessToken,"isAddInfo":hasUser.isAddInfo,"lolName":hasUser.lolName,"sex":hasUser.sex}
+				}
 				
+
 			}catch(e){
 				const err = new InternalServerError("회원가입 중에 에러가 발생하였습니다.");
 				return done(err,null);
 			}
 			
-			done(null,{"id":_profile.id,"email":_profile.kaccount_email,"name":_profile.properties.nickname,"accessToken":accessToken,"isAddInfo":false});
+			done(null,sessionInfo);
 		}));
 	}
 
