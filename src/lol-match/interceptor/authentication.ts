@@ -6,7 +6,7 @@ import UserTokenService from "../service/user/user-token-service";
 import UserToken from "../entity/user/user-token";
 import User from "../entity/user/user";
 import Axios from "axios";
-import { InternalServerError } from "../error/error";
+import { InternalServerError } from "../error/express/error";
 
 export class Authentication{
     @Inject("userTokenService")

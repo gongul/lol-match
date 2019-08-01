@@ -1,7 +1,7 @@
 import {Router} from 'express';
 import passport from "passport";
 import { Container, Inject } from 'typedi';
-import { InternalServerError, NoDataError } from '../../error/error';
+import { InternalServerError, NoDataError } from '../../error/express/error';
 import RsaToken from "../../util/rsa-token";
 import UserToken from '../../entity/user/user-token';
 import UserTokenService from "../../service/user/user-token-service";

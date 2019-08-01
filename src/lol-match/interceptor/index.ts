@@ -1,6 +1,6 @@
 import user from "./router/user";
 import etc from "./router/etc";
-import {Passport} from "./router/passport";
+import {Passport} from "./passport";
 import {Container} from "typedi";
 import {Authentication} from "./authentication";
 import { Request } from "express-serve-static-core";

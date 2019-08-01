@@ -1,7 +1,7 @@
 import { Service } from "typedi";
 import { getManager, Repository, ObjectLiteral, InsertResult, QueryFailedError } from "typeorm";
 import User from "../../entity/user/user";
-import { QueryError, NoDataError } from "../../error/error";
+import { QueryError, NoDataError } from "../../error/express/error";
 
 @Service("userService")
 export class UserServiceImpl<T extends User> implements UserService<T>{

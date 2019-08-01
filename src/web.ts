@@ -7,7 +7,7 @@ import App from "./lol-match/config/app";
 import {developmentOptions,productionOptions} from "./lol-match/config/ormconfig";
 import { WebConfig } from "interface/web-config";
 import { exception } from "./lol-match/interceptor/exception";
-
+import graphqlHTTP from 'express-graphql';
 
 function configFn():WebConfig{
     let config:WebConfig = {ormConfig:productionOptions,serverPort:80};

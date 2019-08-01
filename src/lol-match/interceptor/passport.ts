@@ -1,9 +1,9 @@
 import passport from "passport";
 import * as passportKaKao from 'passport-kakao';
-import keys from '../../config/api-key';
+import keys from '../config/api-key';
 import { Inject,Container, Service } from "typedi";
-import User from "../../entity/user/user";
-import { InternalServerError } from "../../error/error";
+import User from "../entity/user/user";
+import { InternalServerError } from "../error/express/error";
 
 const KaKaoStrategy = passportKaKao.Strategy;
 class Passport {

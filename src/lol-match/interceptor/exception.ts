@@ -1,6 +1,6 @@
 import { Request, Response } from "express-serve-static-core";
 import { NextFunction } from "express-serve-static-core";
-import {ErrorFrame} from "../error/error";
+import {ErrorFrame} from "../error/express/error";
 
 const exception = (err:Error, req:Request, res:Response, next:NextFunction)  => {
     if(err instanceof ErrorFrame){

@@ -10,6 +10,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import { GraphQLError } from 'graphql';
 import {Express} from "../../../type/express-core";
+import { isEmail } from '../interceptor/validation/isEmail';
 
 export default class App{
     private app:Express = express();
@@ -17,6 +18,7 @@ export default class App{
     private constructor(){
         const _app = this.app;
 
+        // 하나의 url을 만들때마다 사용되는 리소스가 너무 많은 거 같다 최적화 생각 해봐야함
         _app.graph = async function(url : string,schemaClass : any,option : any){
             const schema = await buildSchema({
                 resolvers: [schemaClass],
@@ -38,6 +40,8 @@ export default class App{
                 }   
                
             }
+
+            option['validationRules'] = [isEmail];
            
         
             this.use(url,graphqlHTTP(option));

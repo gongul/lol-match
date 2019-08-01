@@ -1,7 +1,7 @@
 import { Service, Inject } from "typedi";
 import { getManager, Repository, ObjectLiteral, InsertResult, QueryFailedError } from "typeorm";
 import User from "../../entity/user/user";
-import { QueryError } from "../../error/error";
+import { QueryError } from "../../error/express/error";
 import UserToken from "../../entity/user/user-token";
 
 @Service("userTokenService")

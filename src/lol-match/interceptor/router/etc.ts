@@ -10,18 +10,22 @@ router.use((req,res,next) => {
 
     return next();
 })
+
+// 세션이 없거나 추가 정보를 입력했다면 홈으로 리다이렉트
 router.use('/begin-addinfo',(req,res,next) => {
     if(req.session == undefined || req.session.passport == undefined || req.session.passport.user.isAddInfo == true) return res.redirect(302,"/");
 
     return next();
 });
 
+// 세션이 없거나 추가 정보를 입력했다면 홈으로 리다이렉트
 router.use('/sucess-addinfo',(req,res,next) => {
     if(req.session == undefined || req.session.passport == undefined || req.session.passport.user.isAddInfo == true) return res.redirect(302,"/");
 
     return next();
 });
 
+// 세션이 있다면 홈으로 리다이렉트
 router.use('/login',(req,res,next) => {
     if(req.session && req.session.passport) return res.redirect(302,"/");
 
