@@ -2,7 +2,7 @@ import passport from "passport";
 import * as passportKaKao from 'passport-kakao';
 import keys from '../config/api-key';
 import { Inject,Container, Service } from "typedi";
-import User from "../entity/user/user";
+import UserEntity from "../entity/user/user";
 import { InternalServerError } from "../error/express/error";
 
 const KaKaoStrategy = passportKaKao.Strategy;
@@ -34,7 +34,7 @@ class Passport {
 			try{
 				const hasUser = await _userService.findByEmail(_profile.kaccount_email);
 
-				const user = new User({id:_profile.id,name:_profile.properties.nickname,email:_profile.kaccount_email});
+				const user = new UserEntity({id:_profile.id,name:_profile.properties.nickname,email:_profile.kaccount_email});
 
 				if(hasUser === undefined) {
 					await _userService.insert(user);

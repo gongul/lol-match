@@ -1,13 +1,13 @@
 import { Service } from "typedi";
 import { getManager, Repository, ObjectLiteral, InsertResult, QueryFailedError } from "typeorm";
-import User from "../../entity/user/user";
+import UserEntity from "../../entity/user/user";
 import { QueryError, NoDataError } from "../../error/express/error";
 
 @Service("userService")
 export class UserServiceImpl<T extends User> implements UserService<T>{
-    private repo!: Repository<User>; 
+    private repo!: Repository<UserEntity>; 
 
-    constructor(){this.repo = getManager().getRepository(User);}
+    constructor(){this.repo = getManager().getRepository(UserEntity);}
 
     /**
     * 이메일 기준으로 유저를 찾는다.
@@ -16,7 +16,7 @@ export class UserServiceImpl<T extends User> implements UserService<T>{
     * 
     */
     async findByEmail(email:string):Promise<User|undefined>{
-        const user:User = new User();
+        const user:User = new UserEntity();
         
         user.email = email;
 
@@ -38,7 +38,7 @@ export class UserServiceImpl<T extends User> implements UserService<T>{
     * @param email  user email
     * 
     */
-    async findByEmailEndSave<T extends User>(email:string,args:T):Promise<User>{
+    async findByEmailEndSave(email:string,args:T):Promise<T>{
         try{
             const hasUser = await this.findByEmail(email);
 
@@ -61,7 +61,7 @@ export class UserServiceImpl<T extends User> implements UserService<T>{
     * @param entity  User를 상속한 모든 객체
     * 
     */
-    async save<T extends User>(entity:T):Promise<T>{
+    async save(entity:T):Promise<T>{
         try{
             const obj = await this.repo.save(entity);
 
@@ -81,7 +81,7 @@ export class UserServiceImpl<T extends User> implements UserService<T>{
     * @param entity  User를 상속한 모든 객체
     * 
     */
-    async insert<T extends User>(entity:T):Promise<T>{
+    async insert(entity:T):Promise<T>{
         try{
             const obj = await this.repo.insert(entity);
 

@@ -4,7 +4,7 @@ import { NextFunction } from "connect";
 import RsaToken from "../util/rsa-token";
 import UserTokenService from "../service/user/user-token-service";
 import UserToken from "../entity/user/user-token";
-import User from "../entity/user/user";
+import UserEntity from "../entity/user/user";
 import Axios from "axios";
 import { InternalServerError } from "../error/express/error";
 
@@ -48,7 +48,7 @@ export class Authentication{
         let user:User|undefined;
 
         try{    
-            const u = new User({email:info.email});
+            const u = new UserEntity({email:info.email});
             const userToken = new UserToken({Identifier:userAgent,token:cookies.uToken,expire:info.exp,email:[u]});
     
             hasToken = await this.userTokenService.findOne(userToken);

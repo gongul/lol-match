@@ -1,5 +1,4 @@
 import { Inject } from 'typedi';
-import User from '../../entity/user/user';
 import Router from '../../config/override-express-router';
 import { Router as ExpressRouter} from 'express';
 import { UserResolve } from '../../resolve/user/user-resolve';

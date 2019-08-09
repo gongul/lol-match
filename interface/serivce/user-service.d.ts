@@ -22,7 +22,7 @@ interface UserService<T extends User>{
     * @param email  user email
     * 
     */
-    findByEmailEndSave(email:string,args:object):Promise<User>;
+   findByEmailEndSave(email:string,args:T):Promise<T>
 
     /**
     * 유저를 데이터베이스에 삽입 한다.

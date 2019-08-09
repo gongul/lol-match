@@ -1,10 +1,10 @@
 import Container from "typedi";
-import User from "../lol-match/entity/user/user";
+import UserEntity from "../lol-match/entity/user/user";
 
 
 export default async function throwTest(){
     const _userService:UserService<User> = Container.get("userService");
-    const user = new User();
+    const user = new UserEntity();
     user.id = 4444;
     user.name = "a"
     user.email = "e@m.com"

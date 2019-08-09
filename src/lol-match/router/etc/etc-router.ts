@@ -5,7 +5,7 @@ import { InternalServerError, NoDataError } from '../../error/express/error';
 import RsaToken from "../../util/rsa-token";
 import UserToken from '../../entity/user/user-token';
 import UserTokenService from "../../service/user/user-token-service";
-import User from "../../entity/user/user";
+import UserEntity from "../../entity/user/user";
 
 class EtcController{
     public router:Router = Router();
@@ -46,7 +46,7 @@ class EtcController{
             const {name,lolName,sex} = req.body;
             const {email,accessToken} = sessionInfo;
 
-            let user:User = new User({name:name,lolName:lolName,sex:sex,isAddInfo:true});
+            let user:User = new UserEntity({name:name,lolName:lolName,sex:sex,isAddInfo:true});
 
              // 유저 추가 정보 입력
             try{   

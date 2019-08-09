@@ -21,12 +21,13 @@ export default class App{
         // 하나의 url을 만들때마다 사용되는 리소스가 너무 많은 거 같다 최적화 생각 해봐야함
         _app.graph = async function(url : string,schemaClass : any,option : any){
             const schema = await buildSchema({
-                resolvers: [schemaClass],
-                container: Container,
-                validate: true,
-            });
-        
+                    resolvers: [schemaClass],
+                    container: Container,
+                    validate: true,
+                });
+         
             option['schema'] = schema;
+
             /*
                 여기에 들어오는 에러는 resolve 기준으로 모든 에러가 들어오는데 에러를 커스텀할라고 하면
                  customValidateFn,customExecuteFn 완전 커스텀을 해야한다. 참고 https://github.com/graphql/express-graphql#options
@@ -43,7 +44,6 @@ export default class App{
 
             option['validationRules'] = [isEmail];
            
-        
             this.use(url,graphqlHTTP(option));
         }  
 
@@ -65,7 +65,7 @@ export default class App{
         _app.use(passport.session());
     }
 
-    public static bootstrap(serverPort:number){
+    public static bootstrap(serverPort:number):Express{
         const express = new App();
         express.app.listen(serverPort);
 
