@@ -67,7 +67,7 @@ export default class App{
 
     public static bootstrap(serverPort:number):Express{
         const express = new App();
-        express.app.listen(serverPort);
+        // express.app.listen(serverPort);
 
         return express.app;
     }

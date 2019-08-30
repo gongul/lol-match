@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Socket</title>
+        <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font: 13px Helvetica, Arial; }
+        form { background: #000; padding: 3px; position: fixed; bottom: 
+        0;width: 100%; }
+        form input { border: 0; padding: 10px; width: 90%; margin-right:.5%; }
+        form button { width: 9%; background: rgb(130, 224, 255); border: 
+        none; padding: 10px; }
+        #messages { list-style-type: none; margin: 0; padding: 0; }
+        #messages li { padding: 5px 10px; }
+        #messages li:nth-child(odd) { background: #eee; }
+        </style>
+    </head>
+  <body>
+        <ul id="messages"></ul>
+        <form action="">
+            <input id="m" autocomplete="off" /><button>Send</button>
+        </form>
+        <script src="/socket.io/socket.io.js"></script>
+        <script
+    src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+    crossorigin="anonymous"></script>
+
+        <script>
+        let socket;
+        $(() => {
+            var isFirst = confirm("테스트");
+            var arr = [{"id":1101722319,"name":"규헌","sex":"여자","email":"blue05002@gmail.com"},{"id":1,"name":"t","sex":"남자","email":"fww@naver.com"}]
+            var json = arr[0];
+            if(!isFirst){
+                json = arr[1];
+            }
+
+            socket = io('/match');
+            socket.emit('joinRoom',json);
+            socket.on('joinRoom', (room) => {
+                $('#messages').append($('<li>').text(room));
+            });
+            socket.on('chat message', (msg) => {
+                $('#messages').append($('<li>').text(JSON.stringify(msg)));
+            });
+        });
+        </script>
+    </body>
+</html>

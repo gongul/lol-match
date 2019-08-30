@@ -15,7 +15,7 @@ export const developmentOptions: ConnectionOptions = {
     "type": "sqlite",
     "database": "database.sqlite",
     "synchronize": true,
-    "logging": false,
+    "logging": false,//['query'],
     "entities": [
         AppRootPath.path+"/src/lol-match/entity/**/*.ts"
     ]

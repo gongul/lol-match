@@ -1,7 +1,8 @@
 import { ObjectType,Field,ID, Int, Float } from "type-graphql";
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, PrimaryColumn, ManyToOne, OneToOne } from "typeorm";
 import { IsEmail } from "class-validator";
 import { ReadOnly } from "../../decorator/readonly";
+import MatchEntity from "../match/match";
 
 @Entity()
 @ObjectType()
@@ -30,6 +31,10 @@ export default class UserEntity implements User{
     @Column({ default: false })
     @Field()
     isAddInfo!:boolean
+
+    @OneToOne(type => MatchEntity, match => match.user, )///{ onDelete: 'SET NULL' }
+    @Field({ nullable: true })
+    match?: MatchEntity;
 
     constructor(args: object|User|void){
         if(args != undefined) this.setData(args);

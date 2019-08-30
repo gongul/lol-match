@@ -22,6 +22,9 @@ export default async function index(app: Express){
         res.json({"msg":"done"});
     });
 
+    app.get('/socket', function(req, res) {
+        res.render('socket');
+    });
 
     app.graph("/graphql",UserResolve,
                 {

@@ -6,9 +6,11 @@ import test from "./lol-match-test/gerneric-test";
 import App from "./lol-match/config/app";
 import {developmentOptions,productionOptions} from "./lol-match/config/ormconfig";
 import { WebConfig } from "../interface/web-config";
-import socketIO from 'socket.io';
 import { exception } from "./lol-match/interceptor/exception";
 import graphqlHTTP from 'express-graphql';
+import http from 'http';
+import Container from "typedi";
+import Socket from "./lol-match/config/socket";
 
 function configFn():WebConfig{
     let config:WebConfig = {ormConfig:productionOptions,serverPort:80};
@@ -34,31 +36,10 @@ async function run(){
 
     await createConnection(config.ormConfig);
     const app = App.bootstrap(config.serverPort);
+    const server = http.createServer(app);
+    const socket = Container.get(Socket);
 
-    // const io = socketIO(app);
-
-    // io.on('connection', (socket) => {
-    //     let job;
-    
-    //     socket.on('disconnect',(data) => {
-    //     });
-    
-    
-    //     socket.on('leaveRoom',() => {
-    //         console.log("leaveRoom");
-            
-    //         socket.disconnect();
-    //     });
-        
-    //     socket.on('joinRoom', () => {
-    //         socket.join(() => {
-               
-                
-    //         });
-    //     });
-    
-    // });
-
+    socket.init(server);
     interceptor(app);
     router(app);
     
@@ -68,7 +49,9 @@ async function run(){
     
     app.use(exception);
 
-    console.log(`Running a GraphQL server port :${config.serverPort} NODE_ENV ${process.env.NODE_ENV}`);
+    server.listen(config.serverPort,() => {
+        console.log(`Running a GraphQL server port :${config.serverPort} NODE_ENV ${process.env.NODE_ENV}`);
+    })
 }
 
 
