@@ -26,7 +26,7 @@
     "passport": "^0.4.0",
     "passport-kakao": "^0.0.5",
     "reflect-metadata": "^0.1.13",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.4.0",
     "sqlite3": "^4.0.8",
     "type-graphql": "^0.17.4",
     "typedi": "^0.8.0",
