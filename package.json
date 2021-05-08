@@ -30,7 +30,7 @@
     "sqlite3": "^4.0.8",
     "type-graphql": "^0.17.4",
     "typedi": "^0.8.0",
-    "typeorm": "^0.2.17"
+    "typeorm": "^0.2.25"
   },
   "main": "web.ts",
   "scripts": {
